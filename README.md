@@ -43,7 +43,7 @@ Here we pass the address and credit card details.
           @response = req.verify     
                    ({
                         CardType: 'Visa',
-                        CardholderName: 'John Doe',
+                        CardholderName: 'Najeer',
                         Expire: '0320', 
                         Street: '4 corporate sq',
                         City: 'dever',
@@ -159,7 +159,7 @@ Here we pass the Transaction Id and Amount.
 
 
 ####Void(Undo) method: 
-Here we pass the Transaction Id and Amount.
+Here we pass the Transaction Id only.
 
           @response = req.undo     
                    ({
@@ -167,7 +167,7 @@ Here we pass the Transaction Id and Amount.
                     })
          puts @response   #show all the response data, if any error is raised also show errors. 
 ####Adjust method:        
-Here we pass the Transaction Id and Amount.
+Here we pass the Transaction Id and adjust Amount.
 
           @response = req.adjust     
                    ({
