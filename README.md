@@ -32,122 +32,164 @@ And then run the command:
 ####4.How to initialize the ruby SDK
 Frist initialize the object
                             
-        req = Velocity::Processor.new(
+  req = Velocity::VelocityProcessor.new(
                                    identity_token,
                                    work_flow_id,
                                    application_profile_id,
                                    merchant_profile_id)        
-####Verify method:       
-Here we pass the address and credit card details.
+####Verify Transaction:       
+Here we pass the address and credit card details, and industry type.
 
           @response = req.verify     
                    ({
-                        CardType: 'Visa',
-                        CardholderName: 'Najeer',
-                        Expire: '0320', 
+                        CardholderName: 'John Doe',
                         Street: '4 corporate sq',
                         City: 'dever',
                         CountryCode: 'USA',
                         PostalCode: '30329',
-                        Phone: '9540243939',
+                        Phone: '9540123123',
                         Email: 'najeers@chetu.com',
-                        Amount: '10.00', 
-                        PAN: '4012888812348882', 
+                        Amount: '10.00',
+                        CardType: 'Visa',
+                        PAN: '4012888812348882',
+                        Expire: '0320', 
                         CVData: '123',
-                        InvoiceNumber: '802',
-                        OrderNumber: '629203'
+                        EntryMode: 'Keyed',
+                        IndustryType: 'Ecommerce'
                     })
          puts @response  # show all the response data, if any error is raised also show errors. 
 
 
-####Authorize without Token method:                   
-Here we pass the address and credit card details.
+####Authorize without Token Transaction:                   
+Here we pass the address and credit card details, and industry type.
 
           @response = req.authorize     
                    ({
-                        CardType: 'Visa',
-                        Expire: '0320', 
                         Street1: '4 corporate sq',
                         City: 'dever',
                         CountryCode: 'USA',
                         PostalCode: '30329',
-                        Phone: '9540243939',
+                        Phone: '9540123123',
                         Email: 'najeers@chetu.com',
                         Amount: '10.00', 
-                        PAN: '4012888812348882', 
+                        CardType: 'Visa',
+                        PAN: '4012888812348882',
+                        Expire: '0320',  
                         CVData: '123',
                         InvoiceNumber: '802',
-                        OrderNumber: '629203'
+                        OrderNumber: '629203',
+                        EntryMode: 'Keyed',
+                        IndustryType: 'Ecommerce'
                     })
          puts @response   #show all the response data, if any error is raised also show errors.
-####Authorize with Token method:  
-Here we pass the address, credit card details and also pass the payment account data token.
+
+####Authorize with Token Transaction:  
+Here we pass the address details,industry type, and also pass the payment account data token. 
 
           @response = req.authorize     
                    ({
-                        CardType: 'Visa',
-                        Expire: '0320', 
                         Street1: '4 corporate sq',
                         City: 'dever',
                         CountryCode: 'USA',
                         PostalCode: '30329',
-                        Phone: '9540243939',
+                        Phone: '9540123123',
                         Email: 'najeers@chetu.com',
                         Amount: '10.00', 
                         PaymentAccountDataToken: '   '    
-                        PAN: '4012888812348882', 
-                        CVData: '123',
                         InvoiceNumber: '802',
-                        OrderNumber: '629203'
+                        OrderNumber: '629203',
+                        EntryMode: 'Keyed',
+                        IndustryType: 'Ecommerce'
+                    })
+         puts @response   #show all the response data, if any error is raised also show errors.
+
+####P2PE transaction for Authorize:  
+Here we pass the address details,industry type, and also pass card swape data. 
+
+          @response = req.authorize     
+                   ({
+                        Street1: '4 corporate sq',
+                        City: 'dever',
+                        CountryCode: 'USA',
+                        PostalCode: '30329',
+                        Phone: '9540123123',
+                        Email: 'najeers@chetu.com',
+                        Amount: '10.00', 
+                        SecurePaymentAccountData: '  ',
+                        EncryptionKeyId:  ' ',   
+                        InvoiceNumber: '802',
+                        OrderNumber: '629203',
+                        EntryMode: 'TrackDataFromMSR',
+                        IndustryType: 'Retail'
                     })
          puts @response   #show all the response data, if any error is raised also show errors.
 
 
-####AuthorizeAndCapture without Token:    
- Here we pass the address and credit card details.
+####AuthorizeAndCapture without Token Transaction:    
+ Here we pass the address and credit card details, and industry type.
 
-          @response = req.authorize_capture     
+          @response = req.authorizeAndCapture     
                    ({
-                        CardType: 'Visa',
-                        Expire: '0320', 
                         Street1: '4 corporate sq',
                         City: 'dever',
                         CountryCode: 'USA',
                         PostalCode: '30329',
-                        Phone: '9540243939',
+                        Phone: '9540123123',
                         Email: 'najeers@chetu.com',
                         Amount: '10.00', 
-                        PAN: '4012888812348882', 
+                        CardType: 'Visa',
+                        PAN: '4012888812348882',
+                        Expire: '0320',  
                         CVData: '123',
                         InvoiceNumber: '802',
-                        OrderNumber: '629203'
+                        OrderNumber: '629203',
+                        EntryMode: 'Keyed',
+                        IndustryType: 'Ecommerce'
                     })
          puts @response   #show all the response data, if any error is raised also show errors. 
 
-####AuthorizeAndCapture with Token method:   
-Here we pass the address, credit card details and also pass the payment account data token.
+####AuthorizeAndCapture with Token Transaction:   
+Here we pass the address details,industry type, and also pass the payment account data token. 
 
-          @response = req.authorize_capture     
+          @response = req.authorizeAndCapture     
                    ({
-                        CardType: 'Visa',
-                        Expire: '0320', 
                         Street1: '4 corporate sq',
                         City: 'dever',
                         CountryCode: 'USA',
                         PostalCode: '30329',
-                        Phone: '9540243939',
+                        Phone: '9540123123',
                         Email: 'najeers@chetu.com',
                         Amount: '10.00', 
-                        PaymentAccountDataToken: '   '
-                        PAN: '4012888812348882', 
-                        CVData: '123',
+                        PaymentAccountDataToken: '   '    
                         InvoiceNumber: '802',
-                        OrderNumber: '629203'
+                        OrderNumber: '629203',
+                        EntryMode: 'Keyed',
+                        IndustryType: 'Ecommerce'
                     })
          puts @response   #show all the response data, if any error is raised also show errors. 
 
+####P2PE transaction for AuthorizeAndCapture:  
+Here we pass the address details,industry type, and also pass card swape data. 
 
-####Capture method:
+          @response = req.authorizeAndCapture     
+                   ({
+                        Street1: '4 corporate sq',
+                        City: 'dever',
+                        CountryCode: 'USA',
+                        PostalCode: '30329',
+                        Phone: '9540123123',
+                        Email: 'najeers@chetu.com',
+                        Amount: '10.00', 
+                        SecurePaymentAccountData: '  ',
+                        EncryptionKeyId:  ' ',   
+                        InvoiceNumber: '802',
+                        OrderNumber: '629203',
+                        EntryMode: 'TrackDataFromMSR',
+                        IndustryType: 'Retail'
+                    })
+         puts @response   #show all the response data, if any error is raised also show errors.
+
+####Capture Transaction:
 Here we pass the Transaction Id and Amount.
 
           @response = req.capture     
@@ -157,8 +199,17 @@ Here we pass the Transaction Id and Amount.
                     })
          puts @response   #show all the response data, if any error is raised also show errors.
 
+####Capture All Transaction:
+Here we pass the Transaction Ids and Amounts.
 
-####Void(Undo) method: 
+          @response = req.captureAll     
+                   ({
+                        TransactionId: '      ',
+                        Amount: '10.00'
+                    })
+         puts @response   #show all the response data, if any error is raised also show errors.
+
+####Void(Undo) Transaction: 
 Here we pass the Transaction Id only.
 
           @response = req.undo     
@@ -166,21 +217,22 @@ Here we pass the Transaction Id only.
                         TransactionId: '      '
                     })
          puts @response   #show all the response data, if any error is raised also show errors. 
-####Adjust method:        
-Here we pass the Transaction Id and adjust Amount.
+         
+####Adjust Transaction:        
+Here we pass the Transaction Id and adjusted Amount.
 
           @response = req.adjust     
                    ({
-                        TransactionId: '      ',
+                        TransactionId: '    ',
                         Amount: '10.00'
                     })
          puts @response   #show all the response data, if any error is raised also show errors.
 
 
-####ReturnById method:   
+####ReturnById Transaction:   
 Here we pass the Transaction Id and Amount.
 
-          @response = req.return_by_id     
+          @response = req.returnById     
                    ({
                         TransactionId: '      ',
                         Amount: '10.00'
@@ -188,24 +240,56 @@ Here we pass the Transaction Id and Amount.
          puts @response   #show all the response data, if any error is raised also show errors.
 
 
-####ReturnUnlinked method:   
-Here we pass the address, credit card details and also pass the payment account data token. 
+####ReturnUnlinked Transaction:   
+Here we pass the address details,industry type, and also pass the payment account data token. 
 
-          @response = req.return_unlinked     
+          @response = req.returnUnlinked     
                    ({
-                        CardType: 'Visa',
-                        Expire: '0320', 
                         Street1: '4 corporate sq',
                         City: 'dever',
                         CountryCode: 'USA',
                         PostalCode: '30329',
-                        Phone: '9540243939',
+                        Phone: '9540123123',
                         Email: 'najeers@chetu.com',
                         Amount: '10.00', 
                         PaymentAccountDataToken: '   ',
-                        PAN: '4012888812348882', 
-                        CVData: '123',
                         InvoiceNumber: '802',
-                        OrderNumber: '629203'
+                        OrderNumber: '629203',
+                        EntryMode: 'Keyed',
+                        IndustryType: 'Ecommerce'
                     })
          puts @response   #show all the response data, if any error is raised also show errors.
+
+####P2PE transaction for ReturnUnlinked:  
+Here we pass the address details,industry type, and also pass card swape data. 
+
+          @response = req.returnUnlinked     
+                   ({
+                        Street1: '4 corporate sq',
+                        City: 'dever',
+                        CountryCode: 'USA',
+                        PostalCode: '30329',
+                        Phone: '9540123123',
+                        Email: 'najeers@chetu.com',
+                        Amount: '10.00', 
+                        SecurePaymentAccountData: '  ',
+                        EncryptionKeyId:  ' ',  
+                        InvoiceNumber: '802',
+                        OrderNumber: '629203',
+                        EntryMode: 'TrackDataFromMSR',
+                        IndustryType: 'Retail'
+                    })
+         puts @response   #show all the response data, if any error is raised also show errors.
+         
+####QueryTransactionsDetail Transaction:
+Here we pass the Batch id or TransactionId or TransactionDateRanges.
+
+          @response = req.queryTransactionsDetail     
+            ({
+                BatchIds: '0620',
+                TransactionIds: 'C37A4ACDCA1340E2B458FBA7CDA76785',
+                EndDateTime: '2015-03-17 02:03:40',
+                StartDateTime: '2015-03-13 02:03:40'
+            })
+         puts @response   #show all the response data, if any error is raised also show errors.
+         
