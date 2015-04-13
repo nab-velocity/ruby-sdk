@@ -99,29 +99,31 @@ module Velocity
         error_auth_xml_fault: 'Some value not set in xml for authorize!',
         # capture
         err_cap_sesswfltransid: 'for capture sessiontoken, workflowid and/or transaction id are not set!',
-        err_cap_transid_amount: 'transaction id and/or amount not set!',
+        err_cap_transid_amount: 'transaction id and/or amount not set in xml for captureXML!',
         error_cap_xml_fault: 'Some value not set in xml for capture!',
         # adjust
         err_adjust_sesswfltransid: 'for adjust sessiontoken, workflowid and/or transaction id are not set!',
         err_ver_auth_cap_path: 'verify or authorize or authorizeandcapture request path not set proper!',
-        err_adj_transid_amount: 'adjust request transaction id and/or amount not set!',
+        err_adj_transid_amount: 'transaction id and/or amount not set in xml for adjustXML!',
         error_adj_xml_fault: 'Some value not set in xml for adjust!',
         # authorizeandcapture
         err_authncap_data_array: 'authorizeandcapture data array not set!',
         error_authncap_xml_fault: 'authorizeandcapture reqest xml object is null!',
         err_aurhncap_avswflid: 'PaymentAccountDataToken, avsdata and/or workflowid are not set!',
         # undo
-        err_undo_transid: 'transaction id is in undo request not set!',
+        err_undo_transid: 'transaction id not set in xml for undoXML!',
         error_undo_xml_fault: 'Some value not set in xml for undo!',
         err_undo_sesswfltransid: 'for undo sessiontoken, workflowid and/or transaction id are not set!',
         # returnbyid
-        err_return_data_array: 'transaction id and/or not in returnById request!',
+        err_return_data_array: 'transaction id and/or amount not set in xml for returnByIdXML!',
         error_retu_byid_xml: 'Some value not set in xml for returnById!',
         err_return_tranidwid: 'for returnbyId sessiontoken, workflowid and/or transaction id are not set!',
         err_return_unlinked_amnt: 'for returnunlinked sessiontoken, workflowid and/or transaction id are not set!',
-        err_returnun_data_array: 'transaction id and/or not in returnunlinked request!',
+        err_returnun_data_array: 'Some value not set in xml for returnUnlinkedXML!',
         parameter_missing: "Parameter is missing, please provide parameters.",
-        application_and_merchent_profileid_fault: "Error in applicationprofileid or merchantprofileid"
+        #querytransactiondetails
+        application_and_merchent_profileid_fault: "Error in applicationprofileid or merchantprofileid",
+        qtd_parameter_missing: "Some value not set in querytransactiondetail, batchid, transactionid or capturedates"
       }
     end
   end
