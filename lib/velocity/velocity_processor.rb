@@ -278,7 +278,7 @@ module Velocity
 
     def processError?(response_xml)
       @response = response_xml   
-      p @response
+      #p @response
       msg = REXML::Document.new(@response.body)
         if @response.code == 200 || @response.code == 201
            #p "200200200200"

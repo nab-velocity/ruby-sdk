@@ -135,7 +135,7 @@ module Velocity
                   xml['ns1'].IdentificationInformation params[:IdentificationInformation]
                  }
                  xml['ns1'].CardData('i:nil' =>"true")
-              elsif params[:SecurePaymentAccountData].present? || params[:EncryptionKeyId].present? 
+              elsif params[:SecurePaymentAccountData].present? && params[:EncryptionKeyId].present? 
                 #p "Swipe card..Dukp..."
                  xml['ns5'].SecurePaymentAccountData('xmlns:ns5' =>
                                "http://schemas.ipcommerce.com/CWS/v2.0/Transactions").text(params[:SecurePaymentAccountData])
