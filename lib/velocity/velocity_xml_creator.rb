@@ -42,9 +42,25 @@ module Velocity
                 xml['ns1'].CardData{
                   xml['ns1'].CardType params[:CardType]
                   xml['ns1'].CardholderName params[:CardholderName]
-                  xml['ns1'].PAN params[:PAN] #'4111111111111111'
-                  xml['ns1'].Expire params[:Expire]
-                  xml['ns1'].Track1Data('i:nil' =>"true")
+                  # xml['ns1'].PAN params[:PAN] #'4111111111111111'
+                  # xml['ns1'].Expire params[:Expire]
+                  # xml['ns1'].Track1Data('i:nil' =>"true")
+                  if params[:Track2Data].present?
+                    xml['ns1'].Track2Data params[:Track2Data]
+                    xml['ns1'].PAN('i:nil' =>"true") 
+                    xml['ns1'].Expire('i:nil' =>"true")
+                    xml['ns1'].Track1Data('i:nil' =>"true")
+                  elsif params[:Track1Data].present?
+                    xml['ns1'].Track1Data params[:Track1Data]
+                    xml['ns1'].PAN('i:nil' =>"true") 
+                    xml['ns1'].Expire('i:nil' =>"true")
+                    xml['ns1'].Track2Data('i:nil' =>"true")
+                  else
+                    xml['ns1'].PAN params[:PAN] 
+                    xml['ns1'].Expire params[:Expire]
+                    xml['ns1'].Track1Data('i:nil' =>"true")
+                    xml['ns1'].Track2Data('i:nil' =>"true")
+                  end
                 }
                 xml['ns1'].CardSecurityData{
                   xml['ns1'].AVSData{
@@ -76,7 +92,11 @@ module Velocity
                 xml['ns1'].AccountType 'NotSet'
                 xml['ns1'].CustomerPresent 'Present'
                 xml['ns1'].EmployeeId '11'
-                xml['ns1'].EntryMode params[:EntryMode]
+                if params[:Track2Data].present? || params[:Track1Data].present?
+                  xml['ns1'].EntryMode params[:EntryMode]
+                else
+                  xml['ns1'].EntryMode 'Keyed'
+                end  
                 xml['ns1'].IndustryType params[:IndustryType]
                 xml['ns1'].InvoiceNumber('i:nil' =>"true")
                 xml['ns1'].OrderNumber('i:nil' =>"true")
@@ -115,7 +135,7 @@ module Velocity
                   xml['ns1'].IdentificationInformation params[:IdentificationInformation]
                  }
                  xml['ns1'].CardData('i:nil' =>"true")
-              elsif params[:SecurePaymentAccountData].present? && params[:EncryptionKeyId].present? 
+              elsif params[:SecurePaymentAccountData].present? || params[:EncryptionKeyId].present? 
                 #p "Swipe card..Dukp..."
                  xml['ns5'].SecurePaymentAccountData('xmlns:ns5' =>
                                "http://schemas.ipcommerce.com/CWS/v2.0/Transactions").text(params[:SecurePaymentAccountData])
@@ -142,10 +162,23 @@ module Velocity
                 xml['ns6'].EncryptionKeyId('xmlns:ns6' =>"http://schemas.ipcommerce.com/CWS/v2.0/Transactions",'i:nil' =>"true")
                 xml['ns7'].SwipeStatus('xmlns:ns7' =>"http://schemas.ipcommerce.com/CWS/v2.0/Transactions",'i:nil' =>"true")
                 xml['ns1'].CardData{
-                  xml['ns1'].CardType params[:CardType]    
-                  xml['ns1'].PAN params[:PAN] 
-                  xml['ns1'].Expire params[:Expire]
-                  xml['ns1'].Track1Data('i:nil' =>"true")
+                  xml['ns1'].CardType params[:CardType] 
+                  if params[:Track2Data].present?
+                    xml['ns1'].Track2Data params[:Track2Data]
+                    xml['ns1'].PAN('i:nil' =>"true") 
+                    xml['ns1'].Expire('i:nil' =>"true")
+                    xml['ns1'].Track1Data('i:nil' =>"true")
+                  elsif params[:Track1Data].present?
+                    xml['ns1'].Track1Data params[:Track1Data]
+                    xml['ns1'].PAN('i:nil' =>"true") 
+                    xml['ns1'].Expire('i:nil' =>"true")
+                    xml['ns1'].Track2Data('i:nil' =>"true")
+                  else
+                    xml['ns1'].PAN params[:PAN] 
+                    xml['ns1'].Expire params[:Expire]
+                    xml['ns1'].Track1Data('i:nil' =>"true")
+                    xml['ns1'].Track2Data('i:nil' =>"true")
+                  end        
                 }
                 xml['ns1'].EcommerceSecurityData('i:nil' =>"true")             
               end
@@ -269,9 +302,22 @@ module Velocity
                 xml['ns7'].SwipeStatus('xmlns:ns7' =>"http://schemas.ipcommerce.com/CWS/v2.0/Transactions",'i:nil' =>"true")
                 xml['ns1'].CardData{
                   xml['ns1'].CardType params[:CardType]    
-                  xml['ns1'].PAN params[:PAN] 
-                  xml['ns1'].Expire params[:Expire]
-                  xml['ns1'].Track1Data('i:nil' =>"true")
+                  if params[:Track2Data].present?
+                    xml['ns1'].Track2Data params[:Track2Data]
+                    xml['ns1'].PAN('i:nil' =>"true") 
+                    xml['ns1'].Expire('i:nil' =>"true")
+                    xml['ns1'].Track1Data('i:nil' =>"true")
+                  elsif params[:Track1Data].present?
+                    xml['ns1'].Track1Data params[:Track1Data]
+                    xml['ns1'].PAN('i:nil' =>"true") 
+                    xml['ns1'].Expire('i:nil' =>"true")
+                    xml['ns1'].Track2Data('i:nil' =>"true")
+                  else
+                    xml['ns1'].PAN params[:PAN] 
+                    xml['ns1'].Expire params[:Expire]
+                    xml['ns1'].Track1Data('i:nil' =>"true")
+                    xml['ns1'].Track2Data('i:nil' =>"true")
+                  end
                 }
                 xml['ns1'].EcommerceSecurityData('i:nil' =>"true")             
               end
@@ -501,9 +547,22 @@ module Velocity
                 xml['ns7'].SwipeStatus('xmlns:ns7' =>"http://schemas.ipcommerce.com/CWS/v2.0/Transactions",'i:nil' =>"true")
                 xml['ns1'].CardData{
                   xml['ns1'].CardType params[:CardType]    
-                  xml['ns1'].PAN params[:PAN] 
-                  xml['ns1'].Expire params[:Expire]
-                  xml['ns1'].Track1Data('i:nil' =>"true")
+                  if params[:Track2Data].present?
+                    xml['ns1'].Track2Data params[:Track2Data]
+                    xml['ns1'].PAN('i:nil' =>"true") 
+                    xml['ns1'].Expire('i:nil' =>"true")
+                    xml['ns1'].Track1Data('i:nil' =>"true")
+                  elsif params[:Track1Data].present?
+                    xml['ns1'].Track1Data params[:Track1Data]
+                    xml['ns1'].PAN('i:nil' =>"true") 
+                    xml['ns1'].Expire('i:nil' =>"true")
+                    xml['ns1'].Track2Data('i:nil' =>"true")
+                  else
+                    xml['ns1'].PAN params[:PAN] 
+                    xml['ns1'].Expire params[:Expire]
+                    xml['ns1'].Track1Data('i:nil' =>"true")
+                    xml['ns1'].Track2Data('i:nil' =>"true")
+                  end
                 }
                 xml['ns1'].EcommerceSecurityData('i:nil' =>"true")             
               end
@@ -539,7 +598,6 @@ module Velocity
                 else
                   xml['ns8'].Amount('xmlns:ns8' =>"http://schemas.ipcommerce.com/CWS/v2.0/Transactions").text('0.00')
                 end
-                #xml['ns8'].Amount('xmlns:ns8' =>"http://schemas.ipcommerce.com/CWS/v2.0/Transactions").text(params[:Amount])
                 xml['ns9'].CurrencyCode('xmlns:ns9' =>"http://schemas.ipcommerce.com/CWS/v2.0/Transactions").text('USD') 
                 xml['ns10'].TransactionDateTime('xmlns:ns10' =>"http://schemas.ipcommerce.com/CWS/v2.0/Transactions").text('2013-04-03T13:50:16')
                 xml['ns11'].CampaignId('xmlns:ns11' =>"http://schemas.ipcommerce.com/CWS/v2.0/Transactions",'i:nil' =>"true")
@@ -610,7 +668,7 @@ module Velocity
                   :Amounts => nil,
                   :ApprovalCodes => nil,
                   :BatchIds => batch_ids(params),
-                  :CaptureDateRange =>transaction_date_range(params),
+                  :CaptureDateRange =>nil,
                   :CaptureStates => nil,
                   :TransactionIds => mul_trd(params),
                   :MerchantProfileIds => nil,
@@ -627,7 +685,7 @@ module Velocity
              :IncludeRelated => 'false' 
          }.to_json
       rescue Exception => ex
-        return "Some value not set in querytransactiondetail, batchid, transactionid or capturedates!"
+        return "Some value not set in querytransactiondetail, batchid, transactionid or transactiondates!"
       end
     end
 

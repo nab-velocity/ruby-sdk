@@ -242,7 +242,7 @@ module Velocity
       end
     end  
  
- # ----------------------> queryTransactionsDetail Method  <------------------------- #
+  # ----------------------> queryTransactionsDetail Method  <------------------------- #
 
   # "queryTransactionsDetail" method for making POST request.
   # In this operation queries the specified transactions and returns both summary details and full transaction details as a serialized object.
@@ -265,19 +265,11 @@ module Velocity
               processError?(response_xml)        
            end        
       rescue Exception => ex 
-        return "Some value not set in querytransactiondetail, batchid, transactionid or capturedates!" 
+        return "Some value not set in querytransactiondetail, batchid, transactionid or transactiondates!" 
       end  
     end  
 
     private
-
-    def parameter_exists?(params)
-      params.size != 0 || raise(ParameterMissing, MESSAGE[:parameter_missing])
-    end
-    def appl_merch_pid_exists?(parm)  
-       (parm[:ApplicationProfileId] || parm[:MerchantProfileId]) != '' || raise(ApplicationAndMerchentProfileidFault,
-        MESSAGE[:application_and_merchent_profileid_fault])
-    end 
   
   # processError? method in Velocity response for error messages
   # response_xml is response object, error message created on the basis of gateway error status. 
@@ -286,7 +278,7 @@ module Velocity
 
     def processError?(response_xml)
       @response = response_xml   
-      #p @response
+      p @response
       msg = REXML::Document.new(@response.body)
         if @response.code == 200 || @response.code == 201
            #p "200200200200"
