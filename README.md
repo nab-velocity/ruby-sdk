@@ -8,7 +8,10 @@
   The above command will generate the .tar file. Now you can install the gem directly using this command:
  
         $ gem install velocity-0.0.0.gem
-
+#####OR
+To add the following line to your application's Gemfile:
+  
+    gem 'velocity', :git => "git://github.com/nab-velocity/ruby-sdk.git" 
 
 ####2.Dependencies:
 The Velocity Ruby SDK has the following dependencies which are required by the gems.
@@ -32,31 +35,69 @@ And then run the command:
 ####4.How to initialize the ruby SDK
 Frist initialize the object
                             
-  req = Velocity::VelocityProcessor.new(
-                                   identity_token,
-                                   work_flow_id,
-                                   application_profile_id,
-                                   merchant_profile_id)        
+        req = Velocity::VelocityProcessor.new(
+                                        identity_token,
+                                        work_flow_id,
+                                        application_profile_id,
+                                        merchant_profile_id)        
 ####Verify Transaction:       
 Here we pass the address and credit card details, and industry type.
 
           @response = req.verify     
-                   ({
-                        CardholderName: 'John Doe',
-                        Street: '4 corporate sq',
-                        City: 'dever',
-                        CountryCode: 'USA',
-                        PostalCode: '30329',
-                        Phone: '9540123123',
-                        Email: 'najeers@chetu.com',
-                        Amount: '10.00',
-                        CardType: 'Visa',
-                        PAN: '4012888812348882',
-                        Expire: '0320', 
-                        CVData: '123',
-                        EntryMode: 'Keyed',
-                        IndustryType: 'Ecommerce'
-                    })
+                ({
+                     CardholderName: 'John Doe',
+                     Street: '4 corporate sq',
+                     City: 'dever',
+                     CountryCode: 'USA',
+                     PostalCode: '30329',
+                     Phone: '9540123123',
+                     Email: 'najeers@chetu.com',
+                     Amount: '10.00',
+                     CardType: 'Visa', 
+                     CVData: '123',
+                     IndustryType: 'Ecommerce',
+                     PAN: '4012888812348882',
+                     Expire: '0320',
+                     EntryMode: 'Keyed'
+               })
+	 	
+		OR
+
+	   @response = req.verify     
+              ({
+                     CardholderName: 'John Doe',
+                     Street: '4 corporate sq',
+                     City: 'dever',
+                     CountryCode: 'USA',
+                     PostalCode: '30329',
+                     Phone: '9540123123',
+                     Email: 'najeers@chetu.com',
+                     Amount: '10.00',
+                     CardType: 'Visa', 
+                     CVData: '123',
+                     IndustryType: 'Ecommerce',
+                     Track1Data: '%B4012000033330026^NAJEER/SHAIK ^0904101100001100000000123456780?',
+                     EntryMode: 'TrackDataFromMSR'
+               })
+	 	
+		OR
+
+	   @response = req.verify     
+              ({
+                    CardholderName: 'John Doe',
+                     Street: '4 corporate sq',
+                     City: 'dever',
+                     CountryCode: 'USA',
+                     PostalCode: '30329',
+                     Phone: '9540123123',
+                     Email: 'najeers@chetu.com',
+                     Amount: '10.00',
+                     CardType: 'Visa', 
+                     CVData: '123',
+                     IndustryType: 'Ecommerce',
+                    Track2Data: '4012000033330026=09041011000012345678',
+                     EntryMode: 'TrackDataFromMSR'
+               })
          puts @response  # show all the response data, if any error is raised also show errors. 
 
 
@@ -64,23 +105,63 @@ Here we pass the address and credit card details, and industry type.
 Here we pass the address and credit card details, and industry type.
 
           @response = req.authorize     
-                   ({
-                        Street1: '4 corporate sq',
-                        City: 'dever',
-                        CountryCode: 'USA',
-                        PostalCode: '30329',
-                        Phone: '9540123123',
-                        Email: 'najeers@chetu.com',
-                        Amount: '10.00', 
-                        CardType: 'Visa',
-                        PAN: '4012888812348882',
-                        Expire: '0320',  
-                        CVData: '123',
-                        InvoiceNumber: '802',
-                        OrderNumber: '629203',
-                        EntryMode: 'Keyed',
-                        IndustryType: 'Ecommerce'
-                    })
+              ({
+                    Street1: '4 corporate sq',
+                    City: 'dever',
+                    CountryCode: 'USA',
+                    PostalCode: '30329',
+                    Phone: '9540123123',
+                    Email: 'najeers@chetu.com',
+                    IndustryType: 'Ecommerce'
+                    InvoiceNumber: '802',
+                    OrderNumber: '629203',
+                    Amount: '10.00', 
+                    CardType: 'Visa',
+                    CVData: '123',
+                    PAN: '4012888812348882',
+                    Expire: '0320',  
+                    EntryMode: 'Keyed'
+              })
+
+              OR
+
+         @response = req.authorize     
+              ({
+                    Street1: '4 corporate sq',
+                    City: 'dever',
+                    CountryCode: 'USA',
+                    PostalCode: '30329',
+                    Phone: '9540123123',
+                    Email: 'najeers@chetu.com',
+                    IndustryType: 'Ecommerce'
+                    InvoiceNumber: '802',
+                    OrderNumber: '629203',
+                    Amount: '10.00', 
+                    CardType: 'Visa',
+                    CVData: '123',
+                    Track1Data: '%B4012000033330026^NAJEER/SHAIK ^0904101100001100000000123456780?',  
+                    EntryMode: 'TrackDataFromMSR'
+              })
+
+              OR
+
+        @response = req.authorize     
+              ({
+                    Street1: '4 corporate sq',
+                    City: 'dever',
+                    CountryCode: 'USA',
+                    PostalCode: '30329',
+                    Phone: '9540123123',
+                    Email: 'najeers@chetu.com',
+                    IndustryType: 'Ecommerce'
+                    InvoiceNumber: '802',
+                    OrderNumber: '629203',
+                    Amount: '10.00', 
+                    CardType: 'Visa',
+                    CVData: '123',
+                    Track2Data: '4012000033330026=09041011000012345678',  
+                    EntryMode: 'TrackDataFromMSR'
+              })
          puts @response   #show all the response data, if any error is raised also show errors.
 
 ####Authorize with Token Transaction:  
@@ -129,23 +210,63 @@ Here we pass the address details,industry type, and also pass card swape data.
  Here we pass the address and credit card details, and industry type.
 
           @response = req.authorizeAndCapture     
-                   ({
-                        Street1: '4 corporate sq',
-                        City: 'dever',
-                        CountryCode: 'USA',
-                        PostalCode: '30329',
-                        Phone: '9540123123',
-                        Email: 'najeers@chetu.com',
-                        Amount: '10.00', 
-                        CardType: 'Visa',
-                        PAN: '4012888812348882',
-                        Expire: '0320',  
-                        CVData: '123',
-                        InvoiceNumber: '802',
-                        OrderNumber: '629203',
-                        EntryMode: 'Keyed',
-                        IndustryType: 'Ecommerce'
-                    })
+             ({
+                    Street1: '4 corporate sq',
+                    City: 'dever',
+                    CountryCode: 'USA',
+                    PostalCode: '30329',
+                    Phone: '9540123123',
+                    Email: 'najeers@chetu.com',
+                    IndustryType: 'Ecommerce'
+                    InvoiceNumber: '802',
+                    OrderNumber: '629203',
+                    Amount: '10.00', 
+                    CardType: 'Visa',
+                    CVData: '123',
+                    PAN: '4012888812348882',
+                    Expire: '0320',  
+                    EntryMode: 'Keyed'
+              })
+
+              OR
+
+         @response = req.authorizeAndCapture     
+              ({
+                    Street1: '4 corporate sq',
+                    City: 'dever',
+                    CountryCode: 'USA',
+                    PostalCode: '30329',
+                    Phone: '9540123123',
+                    Email: 'najeers@chetu.com',
+                    IndustryType: 'Ecommerce'
+                    InvoiceNumber: '802',
+                    OrderNumber: '629203',
+                    Amount: '10.00', 
+                    CardType: 'Visa',
+                    CVData: '123',
+                    Track1Data: '%B4012000033330026^NAJEER/SHAIK ^0904101100001100000000123456780?',  
+                    EntryMode: 'TrackDataFromMSR'
+              })
+
+              OR
+
+        @response = req.authorizeAndCapture     
+              ({
+                    Street1: '4 corporate sq',
+                    City: 'dever',
+                    CountryCode: 'USA',
+                    PostalCode: '30329',
+                    Phone: '9540123123',
+                    Email: 'najeers@chetu.com',
+                    IndustryType: 'Ecommerce'
+                    InvoiceNumber: '802',
+                    OrderNumber: '629203',
+                    Amount: '10.00', 
+                    CardType: 'Visa',
+                    CVData: '123',
+                    Track2Data: '4012000033330026=09041011000012345678',  
+                    EntryMode: 'TrackDataFromMSR'
+              })
          puts @response   #show all the response data, if any error is raised also show errors. 
 
 ####AuthorizeAndCapture with Token Transaction:   
@@ -239,8 +360,66 @@ Here we pass the Transaction Id and Amount.
                     })
          puts @response   #show all the response data, if any error is raised also show errors.
 
+####ReturnUnlinked without Token Transaction:   
+Here we pass the address, industry type, credit card details or Track1Data or Track2Data.
 
-####ReturnUnlinked Transaction:   
+        @response = req.returnUnlinked     
+              ({
+                    Street1: '4 corporate sq',
+                    City: 'dever',
+                    CountryCode: 'USA',
+                    PostalCode: '30329',
+                    Phone: '9540123123',
+                    Email: 'najeers@chetu.com',
+                    IndustryType: 'Ecommerce'
+                    InvoiceNumber: '802',
+                    OrderNumber: '629203',
+                    Amount: '10.00', 
+                    CardType: 'Visa',
+                    CVData: '123',
+                    PAN: '4012888812348882',
+                    Expire: '0320',  
+                    EntryMode: 'Keyed'
+              })
+              OR
+         @response = req.returnUnlinked     
+              ({
+                    Street1: '4 corporate sq',
+                    City: 'dever',
+                    CountryCode: 'USA',
+                    PostalCode: '30329',
+                    Phone: '9540123123',
+                    Email: 'najeers@chetu.com',
+                    IndustryType: 'Ecommerce'
+                    InvoiceNumber: '802',
+                    OrderNumber: '629203',
+                    Amount: '10.00', 
+                    CardType: 'Visa',
+                    CVData: '123',
+                    Track1Data: '%B4012000033330026^NAJEER/SHAIK ^0904101100001100000000123456780?',  
+                    EntryMode: 'TrackDataFromMSR'
+              })
+              OR
+        @response = req.returnUnlinked     
+              ({
+                    Street1: '4 corporate sq',
+                    City: 'dever',
+                    CountryCode: 'USA',
+                    PostalCode: '30329',
+                    Phone: '9540123123',
+                    Email: 'najeers@chetu.com',
+                    IndustryType: 'Ecommerce'
+                    InvoiceNumber: '802',
+                    OrderNumber: '629203',
+                    Amount: '10.00', 
+                    CardType: 'Visa',
+                    CVData: '123',
+                    Track2Data: '4012000033330026=09041011000012345678',  
+                    EntryMode: 'TrackDataFromMSR'
+              })
+          puts @response   #show all the response data, if any error is raised also show errors.
+
+####ReturnUnlinked with Token Transaction:   
 Here we pass the address details,industry type, and also pass the payment account data token. 
 
           @response = req.returnUnlinked     
